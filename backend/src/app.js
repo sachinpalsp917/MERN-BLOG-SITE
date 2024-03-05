@@ -20,4 +20,15 @@ app.use(cookieParser());
 
 app.use("/api/users", userRouter);
 app.use("/api/users", authRouter);
+
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "internal server error";
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
+
 export { app };
