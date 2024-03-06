@@ -1,6 +1,7 @@
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth";
 
 export default function SignUp() {
   // using a useState hook to collect the data and then store it into formData and then submitting it to handle submit so that it can be stored into the database.
@@ -30,7 +31,7 @@ export default function SignUp() {
       }
       setLoading(false);
       if (res.ok) {
-        navigate('/signin')
+        navigate("/signin");
       }
     } catch (error) {
       setErrorMessage(error.message);
@@ -98,6 +99,7 @@ export default function SignUp() {
               )}
               Sign Up
             </Button>
+            <OAuth />
           </form>
           <div className="flex gap-2 text-sm mt-5">
             <span>Have an account?</span>
