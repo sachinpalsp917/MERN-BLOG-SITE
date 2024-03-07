@@ -6,6 +6,8 @@ import { signInSuccess } from "../redux/user/userSlice.js";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+// add afuctionality that if the user isnot registerd display an error in it. like the user is trying the direct signin page and using OAuth to sign in then there should be an error "please register first"
+
 export default function OAuth() {
   const auth = getAuth(app);
   const dispatch = useDispatch();
@@ -27,8 +29,8 @@ export default function OAuth() {
       });
       const data = await res.json();
       if (res.ok) {
-          dispatch(signInSuccess(data));
-          navigate('/')
+        dispatch(signInSuccess(data));
+        navigate("/");
       }
     } catch (error) {
       console.log(error);
