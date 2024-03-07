@@ -6,11 +6,10 @@ import {
   signInStart,
   signInSuccess,
   signInFailure,
-} from "../redux/user/userSlice.js";
-import OAuth from "../components/OAuth.jsx";
+} from "../redux/user/userSlice";
+import OAuth from "../components/OAuth";
 
 export default function SignIn() {
-  // using a useState hook to collect the data and then store it into formData and then submitting it to handle submit so that it can be stored into the database.
   const [formData, setFormData] = useState({});
   const { loading, error: errorMessage } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -20,8 +19,8 @@ export default function SignIn() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.username || !formData.password) {
-      return dispatch(signInFailure("Please fill out all details"));
+    if (!formData.email || !formData.password) {
+      return dispatch(signInFailure("Please fill all the fields"));
     }
     try {
       dispatch(signInStart());
@@ -45,37 +44,38 @@ export default function SignIn() {
   };
   return (
     <div className="min-h-screen mt-20">
-      <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-3">
+      <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
         {/* left */}
         <div className="flex-1">
-          <Link to="/" className="font-bold dark:text-white text-5xl">
-            <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-lg">
+          <Link to="/" className="font-bold dark:text-white text-4xl">
+            <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">
               Sachin&apos;s
             </span>
-            blog
+            Blog
           </Link>
-          <p className="text-sm mt-4">
-            This is a demo project. You can sign in using email and password or
-            using google account
+          <p className="text-sm mt-5">
+            This is a demo project. You can sign in with your email and password
+            or with Google.
           </p>
         </div>
         {/* right */}
+
         <div className="flex-1">
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <div>
-              <Label value="Your Username" />
+              <Label value="Your email" />
               <TextInput
-                type="text"
-                placeholder="Username"
-                id="username"
+                type="email"
+                placeholder="name@company.com"
+                id="email"
                 onChange={handleChange}
               />
             </div>
             <div>
-              <Label value="Password" />
+              <Label value="Your password" />
               <TextInput
                 type="password"
-                placeholder="password"
+                placeholder="**********"
                 id="password"
                 onChange={handleChange}
               />
@@ -91,15 +91,14 @@ export default function SignIn() {
                   <span className="pl-3">Loading...</span>
                 </>
               ) : (
-                ""
+                "Sign In"
               )}
-              Sign In
             </Button>
             <OAuth />
           </form>
           <div className="flex gap-2 text-sm mt-5">
-            <span>Don&apos;t have an account?</span>
-            <Link to="/signup" className="text-blue-500">
+            <span>Dont Have an account?</span>
+            <Link to="/sign-up" className="text-blue-500">
               Sign Up
             </Link>
           </div>
