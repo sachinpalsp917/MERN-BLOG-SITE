@@ -31,15 +31,15 @@ const signup = async (req, res, next) => {
 
 // for checking the username and password
 const signin = async (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username || !password || username === "" || password === "") {
+  if (!email || !password || email === "" || password === "") {
     next(errorHandler(400, "All fields are required"));
   }
 
   try {
     //checking the username
-    const validUser = await User.findOne({ username });
+    const validUser = await User.findOne({ email });
     if (!validUser) {
       return next(errorHandler(404, "User not found"));
     }
@@ -56,7 +56,7 @@ const signin = async (req, res, next) => {
     const { password: pass, ...userData } = validUser._doc;
     res
       .status(200)
-      .cookie("access_token", token, { httpOnly: true })
+      .cookie("access-token", token, { httpOnly: true })
       .json(userData);
   } catch (error) {
     next(error);
