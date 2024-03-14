@@ -4,7 +4,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { toogleTheme } from "../redux/theme/themeSlice.js";
-
+import  Logo  from './Logo.jsx'
 export default function Header() {
   const path = useLocation().pathname;
   const dispatch = useDispatch();
@@ -13,15 +13,7 @@ export default function Header() {
   return (
     <Navbar className="border-b-2">
       {/* main icon */}
-      <Link
-        to="/"
-        className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
-      >
-        <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-lg">
-          Sachin&apos;s
-        </span>
-        blog
-      </Link>
+      <Logo />
       {/* search bar */}
       <form>
         <TextInput
