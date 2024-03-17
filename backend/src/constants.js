@@ -1,1 +1,1 @@
-export const db_name = "BLOGSITE"
+export const db_name = "BRCTC"
